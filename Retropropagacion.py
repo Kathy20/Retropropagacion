@@ -10,6 +10,12 @@ Profesor: Jose Castro.
 Fecha: 22 de abril del 2016
 """
 
+##### La base de datos tiene 3 numeros al inicio:
+# 1-> Cantidad de pares de entrenamiento
+# 2-> Dimension de la entrada
+# 3-> Dimension de la salida
+##### Cada imagen esta separada por un vector que indica su posicion
+
 def newWeights(n,m):
     "Genera una nueva matriz de pesos nxm que conecta con la capa siguiente"
     return 0
@@ -29,7 +35,7 @@ def readNetwork(archivo):
     Entrada:
         -archivo: Nombre del archivo que almacena la red neural.
     Salida:
-        - Es un par de matrices correspondientes a los pesos
+        - Par de matrices correspondientes a los pesos
         entre la capa de input y la capa oculta, y entre la capa
         oculta y la salida (los pesos incluyen a la neurona de sesgo).
     """
