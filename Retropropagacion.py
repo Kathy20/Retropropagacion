@@ -9,16 +9,29 @@ Estudiante: Kathy Brenes G.
 Profesor: Jose Castro.
 Fecha: 22 de abril del 2016
 """
-
+######################################################
+#              CONJUNTO DE APRENDIZAJE               #
 ##### La base de datos tiene 3 numeros al inicio:
 # 1-> Cantidad de pares de entrenamiento
 # 2-> Dimension de la entrada
 # 3-> Dimension de la salida
 ##### Cada imagen esta separada por un vector que indica su posicion
 
+"""S-> Pares de entrenamiento """
+import random
+import math
+
+
 def newWeights(n,m):
     "Genera una nueva matriz de pesos nxm que conecta con la capa siguiente"
-    return 0
+    weights= []
+    for i in range(n):
+        weight=[]
+        for j in range(m):
+            # Genera pesos random
+            weight.append(random.random())
+        weights.append(weight)        
+    return weights
 
 def newNetwork (archivo, inputP, oculta, output):
     """ Genera una nueva red neural con pesos aleatorios.
@@ -28,7 +41,15 @@ def newNetwork (archivo, inputP, oculta, output):
         -output: numero de neuronas en la capa de salida
         -archivo: nombre del archivo donde se almacena la nueva red.
     """
-    return 0
+    net1= newWeights(inputP,oculta)
+    net2= newWeights(oculta,output)
+    newFile = open(archivo, "w")
+    newFile.truncate()
+    #newFile.write(net1)
+    newFile.write("\n")
+    #newFile.write(net2)
+    newFile.close()
+    return newFile
 
 def readNetwork(archivo):
     """Carga una red neural que ha sido guardada en un archivo.
@@ -39,7 +60,8 @@ def readNetwork(archivo):
         entre la capa de input y la capa oculta, y entre la capa
         oculta y la salida (los pesos incluyen a la neurona de sesgo).
     """
-
+    fileRead= open(archivo, 'w')
+    print fileRead
     return 0
 
 def saveNetwork (archivo, W1, W2):
@@ -56,11 +78,39 @@ def saveNetwork (archivo, W1, W2):
     """
     return 0
 
+def g(x):
+    """ Funcion de achatamiento"""
+    total = 1 / (1+ (math.e **-x)) 
+    return total
+
 def forward (X,W1,W2):
     """ Calcula la propagacion hacia adelante y deja el
     resultado en tres variables net1, out1, net2, out2.
+    Entradas:
+        - X: Patron de entrada, salidas de las neuronas de la primer capa.
+        - W1:
+        - W2:
+    Salida:
+        - net1
     """
-    return 0
+    out1= []
+    neth1= []
+    M= [1,2,3]
+    out1[1]= X[1]
+    for k in range(2,len(M)-1):
+        for j in range(0,len(W1)):
+            net1[k]= W1[k-1][j] * out1[k-1][j]
+        if k== len(M)-1:
+            out1[k]= g(net1[k])
+    ########################################
+    out2= []
+    neth2= []
+    out2[1]= X[1]
+    for k in range(2,len(M)-1):
+        net2[k+1]= W2[k] * out2[k]
+        if k== len(M)-1:
+            out2[k+1]= g(net2[k])        
+    return net1,out1,net2,out2
 
 def backward (out1, out2, W1, W2):
     """
@@ -117,6 +167,8 @@ def test (red, casos):
         en el archivo de prueba fueron clasificados correctamente y cuantos no.
     """
     print "Funcion test"
+    newNetwork ("prueba.txt", 64, 32, 10)
+    readNetwork("prueba.txt")
     return 0
 
 
